@@ -14,18 +14,23 @@ struct ReviewRow: View {
         formatter.dateStyle = .long
         return formatter
     }()
-    
-    
+
     let review: Review
     
     var body: some View {
-        HStack {
-            Text("\(review.rating, specifier: "%.1f")").font(.body)
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading){
+            Text(Self.dateFormatter.string(from: review.date ?? Date())).font(.headline)
+            Spacer().frame(height: 15)
+            HStack {
+                Text("\(review.rating, specifier: "%.1f")")
+                    .font(.body)
+                    .background(Circle()
+                                    .fill(Color.blue)
+                                    .frame(width: 40, height: 40))
+                Spacer().frame(width: 20)
                 Text(review.body ?? "").font(.body)
-                Text(Self.dateFormatter.string(from: review.date ?? Date())).font(.caption)
             }
-            
+            Spacer(minLength: 10)
         }
     }
 }

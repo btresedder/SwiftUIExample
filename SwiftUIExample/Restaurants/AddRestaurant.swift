@@ -41,7 +41,6 @@ struct AddRestaurant: View {
     }
     
     private func addRestaurantAction() {
-        print("cuisein: \(cuisine)")
         onComplete(
             name,
             cuisines[selectedCuisineIndex].wrappedType

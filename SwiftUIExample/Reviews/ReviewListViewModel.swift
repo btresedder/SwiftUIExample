@@ -18,6 +18,7 @@ class ReviewListViewModel: ObservableObject {
         self.coreDataHelper = coreDataHelper
     }
     
+    ///fetchReviews - fetches the reviews for the restaurant
     func fetchReviews() {
         if let restaurant = self.restaurant {
             let result: Result<[Review], Error> = coreDataHelper.fetch(Review.self, predicate: NSPredicate(format: "restaurant == %@", restaurant), sort: nil, limit: nil)
@@ -31,6 +32,8 @@ class ReviewListViewModel: ObservableObject {
         }
     }
     
+    ///addReview - adds a new review to the restaurant
+    /// - this will also update the lastReviewDate on the restaurant
     func addReview(body: String, date: Date, rating: Double) {
         let review = Review(context: coreDataHelper.context)
         review.body = body
@@ -44,7 +47,6 @@ class ReviewListViewModel: ObservableObject {
             coreDataHelper.update(restaurant)
         }
 
-        
         fetchReviews()
     }
 }

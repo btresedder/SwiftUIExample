@@ -15,8 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Get the managed object context from the shared persistent container.
-       // let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
         let context = CoreDataHelper.shared.persistentContainer.viewContext
 
         let contentView = RestaurantList().environment(\.managedObjectContext, context)

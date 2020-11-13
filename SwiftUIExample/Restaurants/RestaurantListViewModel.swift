@@ -13,18 +13,19 @@ class RestaurantListViewModel: ObservableObject {
     
     @Published var segmentedSelected: Int = 0 {
         didSet {
-            print("in did set")
             fetchRestaurants()
         }
     }
     
     var coreDataHelper: CoreDataHelperProtocol
     
-    //NOTE: For testability we use dependency injection. We could create a mock class that conforms to the CoreDataHelperProtocol and pass that in to test the view model.
+    //NOTE: For testability we use dependency injection. We could create a mock class that conforms to the CoreDataHelperProtocol and pass that in for testing the view model
     init(coreDataHelper: CoreDataHelperProtocol = CoreDataHelper.shared) {
         self.coreDataHelper = coreDataHelper
     }
     
+    ///FetchRestaurants - this makes the call to fetch restaurants from core data
+    /// - this will apply the sort descriptor based on which segment has been selected in the view
     func fetchRestaurants() {
         var sort = NSSortDescriptor()
         if segmentedSelected == 0 {
@@ -40,9 +41,9 @@ class RestaurantListViewModel: ObservableObject {
         case .failure(let error):
             fatalError(error.localizedDescription)
         }
-        
     }
     
+    ///DeleteRestaurant - deletes the restaurant at the selected index
     func deleteRestaurant(at offsets: IndexSet) {
         offsets.forEach { index in
             let restaurant = self.restaurants[index]
@@ -52,6 +53,7 @@ class RestaurantListViewModel: ObservableObject {
         fetchRestaurants()
     }
     
+    ///addRestaurant - adds a new restaurant to core data
     func addRestaurant(name: String, cuisine: String) {
         
         let restaurant = Restaurant(context: coreDataHelper.context)
@@ -63,7 +65,7 @@ class RestaurantListViewModel: ObservableObject {
         fetchRestaurants()
     }
     
-    
+    ///PopulateCuisines - this will populate the cuisine list after first launch of the app
     func populateCuisines() {
         let defaults = UserDefaults.standard
         
@@ -83,6 +85,11 @@ class RestaurantListViewModel: ObservableObject {
             let cuisine3 = Cuisine(context: coreDataHelper.context)
             cuisine3.type = "BBQ"
             cuisine3.id = UUID()
+            coreDataHelper.create(cuisine3)
+            
+            let cuisine4 = Cuisine(context: coreDataHelper.context)
+            cuisine4.type = "Italian"
+            cuisine4.id = UUID()
             coreDataHelper.create(cuisine3)
         
             defaults.set(true, forKey: "shouldPopulateCuisines")

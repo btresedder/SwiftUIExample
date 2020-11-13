@@ -46,9 +46,6 @@ struct RestaurantList: View {
             self.viewModel.populateCuisines()
         }
     }
-    
-
-    
 }
 
 struct RestaurantList_Previews: PreviewProvider {

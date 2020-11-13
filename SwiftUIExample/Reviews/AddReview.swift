@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AddReview: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
+    //@Environment(\.managedObjectContext) var managedObjectContext
     
-    @FetchRequest(entity: Cuisine.entity(), sortDescriptors: []) var cuisines: FetchedResults<Cuisine>
+    //@FetchRequest(entity: Cuisine.entity(), sortDescriptors: []) var cuisines: FetchedResults<Cuisine>
         
     @State var reviewBody = ""
     @State var reviewDate = Date()

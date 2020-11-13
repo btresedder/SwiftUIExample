@@ -14,7 +14,6 @@ struct ReviewList: View {
         self.viewModel.restaurant = restaurant
     }
     
-    
     //var used to determine if the add restaurant view is presented
     @State var isPresented = false
     
@@ -29,7 +28,6 @@ struct ReviewList: View {
             }
             .sheet(isPresented: $isPresented) {
                 AddReview(onComplete: { reviewBody, date, rating in
-                    //self.viewModel.addReview(body: reviewBody, date: date, rating: rating)
                     self.viewModel.addReview(body: reviewBody, date: date, rating: rating)
                     self.isPresented = false
                 })

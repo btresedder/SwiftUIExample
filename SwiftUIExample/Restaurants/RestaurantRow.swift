@@ -26,8 +26,6 @@ struct RestaurantRow: View {
             Spacer().frame(width: 10)
         }
     }
-    
-    
 }
 
 struct RestaurantRow_Previews: PreviewProvider {
